@@ -5,23 +5,28 @@ require("dotenv/config");
 
 // Import Routes
 const postsRoute = require("./routes/posts");
+const vaultsRoute = require("./routes/vaults");
+const usersRoute = require("./routes/users");
 
 const app = express();
 
+// Middleware
 app.use(cors({
     origin: ['http://localhost:3000', "https://fenx.herokuapp.com"]
 }));
-
 app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json());
 
+// Routes
 app.get("/", (req, res) => {
     res.send("we are on home");
 })
 
 app.use("/posts", postsRoute);
+app.use("/vaults", vaultsRoute);
+app.use("/users", usersRoute);
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
