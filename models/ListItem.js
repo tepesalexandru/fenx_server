@@ -11,4 +11,4 @@ const ListItemSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.Schema('ListItems', ListItemSchema);
+module.exports = mongoose.model('ListItems', ListItemSchema);
