@@ -7,6 +7,7 @@ require("dotenv/config");
 const postsRoute = require("./routes/posts");
 const vaultsRoute = require("./routes/vaults");
 const usersRoute = require("./routes/users");
+const dashboardRoute = require('./routes/dashboard');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/posts", postsRoute);
 app.use("/vaults", vaultsRoute);
 app.use("/users", usersRoute);
+app.use("/dashboard", dashboardRoute);
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
