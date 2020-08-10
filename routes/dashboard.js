@@ -4,9 +4,10 @@ const ListItem = require('../models/ListItem');
 const router = express.Router();
 
 router.get("/:userId", async (req, res) => {
+    console.log(req.params.userId);
     try {
         const findUser = await User.findOne({
-            username: req.params.userId
+            userId: req.params.userId
         });
         res.json(findUser.dashboard);
     } catch (err) {
@@ -19,27 +20,36 @@ router.post("/:userId", async (req, res) => {
         label: req.body.label,
         amount: req.body.amount
     });
+    console.log("request received", req.params.userId);
     try {
         if (req.body.listType === "ASSETS") {
-            await User.updateOne({
-                username: req.params.userId,
+            console.log(req.params.userId);
+            await User.updateOne(
+                {userId: req.params.userId}, {
                 $push: {
-                    dashboard: {
-                        assets: newListItem
-                    }
+                    "dashboard.assets": newListItem
                 }
             });
-            res.json("List item added");
+            res.json(newListItem);
         } else {
             await User.updateOne({
                 username: req.params.userId,
                 $push: {
-                    dashboard: {
-                        liabilities: newListItem
-                    }
+                    "dashboard.liabilities": newListItem
                 }
             })
         }
+    } catch (err) {
+        res.json(err);
+    }
+});
+
+router.delete("/:userId/:postId", async (req, res) => {
+    try {
+        const findUser = await User.updateOne({
+            userId: req.params.userId,
+            $
+        })
     } catch (err) {
         res.json(err);
     }

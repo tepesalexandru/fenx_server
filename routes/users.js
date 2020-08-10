@@ -5,7 +5,7 @@ const User = require("../models/User");
 router.get("/:userId", async (req, res) => {
     try {
         const findUser = await User.findOne({
-            username: req.params.userId
+            userId: req.params.userId
         });
         res.json(findUser);
     } catch (err) {
