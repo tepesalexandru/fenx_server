@@ -20,6 +20,8 @@ app.use(express.urlencoded({
 }))
 app.use(express.json());
 
+app.options("*", cors());
+
 // Routes
 app.get("/", (req, res) => {
     res.send("we are on home");
