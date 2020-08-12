@@ -17,14 +17,13 @@ router.get("/:userId", async (req, res) => {
 });
 
 router.post("/:userId", async (req, res) => {
+    console.log(req.body);
     const newListItem = new ListItem({
         label: req.body.label,
         amount: req.body.amount
     });
-    console.log("request received", req.params.userId);
     try {
         if (req.body.listType === "ASSETS") {
-            console.log(req.params.userId);
             await User.updateOne(
                 {userId: req.params.userId}, {
                 $push: {
@@ -45,9 +44,10 @@ router.post("/:userId", async (req, res) => {
     }
 });
 
-router.delete("/:userId/:postId", async (req, res) => {
+router.delete("/:userId/:postId/:directory", async (req, res) => {
     try {
-        if (req.body.type == "ASSETS") {
+        console.log(req.params);
+        if (req.params.directory === "ASSETS") {
             const findUser = await User.updateOne({
                 userId: req.params.userId,
                 $pull: {
