@@ -47,14 +47,26 @@ router.post("/:userId", async (req, res) => {
 
 router.delete("/:userId/:postId", async (req, res) => {
     try {
-        const findUser = await User.updateOne({
-            userId: req.params.userId,
-            $pull: {
-                "dashboard.assets": {
-                    _id: mongoose.Types.ObjectId(req.params.postId)
+        if (req.body.type === "ASSETS") {
+            const findUser = await User.updateOne({
+                userId: req.params.userId,
+                $pull: {
+                    "dashboard.assets": {
+                        _id: mongoose.Types.ObjectId(req.params.postId)
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            const findUser = await User.updateOne({
+                userId: req.params.userId,
+                $pull: {
+                    "dashboard.liabilities": {
+                        _id: mongoose.Types.ObjectId(req.params.postId)
+                    }
+                }
+            });
+        }
+        
         res.json("post deleted");
     } catch (err) {
         res.json(err);
