@@ -47,7 +47,7 @@ router.post("/:userId", async (req, res) => {
 
 router.delete("/:userId/:postId", async (req, res) => {
     try {
-        if (req.body.type === "ASSETS") {
+        if (req.body.type == "ASSETS") {
             const findUser = await User.updateOne({
                 userId: req.params.userId,
                 $pull: {
