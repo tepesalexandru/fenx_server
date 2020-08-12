@@ -11,14 +11,17 @@ const dashboardRoute = require('./routes/dashboard');
 
 const app = express();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 // Middleware
-app.use(cors());
 app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json());
 
-app.options("*", cors());
 
 // Routes
 app.get("/", (req, res) => {
