@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/User');
 const ListItem = require('../models/ListItem');
 const router = express.Router();
+const mongoose = require("mongoose");
 
 router.get("/:userId", async (req, res) => {
     console.log(req.params.userId);
@@ -48,8 +49,13 @@ router.delete("/:userId/:postId", async (req, res) => {
     try {
         const findUser = await User.updateOne({
             userId: req.params.userId,
-            $
-        })
+            $pull: {
+                "dashboard.assets": {
+                    _id: mongoose.Types.ObjectId(req.params.postId)
+                }
+            }
+        });
+        res.json("post deleted");
     } catch (err) {
         res.json(err);
     }

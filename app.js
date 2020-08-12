@@ -32,8 +32,8 @@ app.use("/dashboard", dashboardRoute);
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log("connected to db!");
+    const PORT = process.env.PORT || 3001;
+
+    app.listen(PORT);
 })
 
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT);
