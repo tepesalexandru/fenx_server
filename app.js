@@ -10,11 +10,7 @@ const usersRoute = require("./routes/users");
 const dashboardRoute = require('./routes/dashboard');
 
 const app = express();
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
- });
+app.use(cors());
 
 // Middleware
 app.use(express.urlencoded({
