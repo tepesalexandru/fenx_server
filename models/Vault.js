@@ -11,6 +11,15 @@ const VaultSchema = mongoose.Schema({
     },
     currentAmount: {
         type: Number,
+        required: false
+    },
+    favorite: {
+        type: Boolean,
+        default: false
+    },
+    imageURL: {
+        type: String,
+        required: false
     }
 });
 
