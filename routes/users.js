@@ -31,11 +31,13 @@ router.post("/new", async (req, res) => {
         const findUser = await User.findOne({
             userId: req.body.userId
         });
-        if (!findUser && req.body.userId != null) {
+        if (!findUser && req.body.userId != undefined) {
             const savedUser = await user.save();
             res.json(savedUser);
         } else {
-            res.json("User already exists");
+            res.json({
+                "alreadyExists": true
+            });
         }
     } catch (err) {
         res.json({
