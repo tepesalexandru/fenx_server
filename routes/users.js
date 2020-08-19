@@ -31,7 +31,7 @@ router.post("/new", async (req, res) => {
         const findUser = await User.findOne({
             userId: req.body.userId
         });
-        if (findUser != null && req.body.userId != underfined && req.body.userId != null) {
+        if (!findUser && req.body.userId != null) {
             const savedUser = await user.save();
             res.json(savedUser);
         } else {
