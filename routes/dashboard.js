@@ -32,12 +32,13 @@ router.post("/:userId", async (req, res) => {
             });
             res.json(newListItem);
         } else {
-            await User.updateOne({
-                username: req.params.userId,
+            await User.updateOne(
+                {userId: req.params.userId}, {
                 $push: {
                     "dashboard.liabilities": newListItem
                 }
-            })
+            });
+            res.json(newListItem);
         }
     } catch (err) {
         res.json(err);
