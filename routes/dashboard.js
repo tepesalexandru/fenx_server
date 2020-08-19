@@ -31,7 +31,7 @@ router.post("/:userId", async (req, res) => {
                 }
             });
             res.json(newListItem);
-        } else {
+        } else if (req.body.listType === "LIABILITIES") {
             await User.updateOne(
                 {userId: req.params.userId}, {
                 $push: {
