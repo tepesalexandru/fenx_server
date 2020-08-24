@@ -4,7 +4,6 @@ const cors = require('cors');
 require("dotenv/config");
 
 // Import Routes
-const postsRoute = require("./routes/posts");
 const vaultsRoute = require("./routes/vaults");
 const usersRoute = require("./routes/users");
 const dashboardRoute = require('./routes/dashboard');
@@ -24,7 +23,6 @@ app.get("/", (req, res) => {
     res.send("we are on home");
 })
 
-app.use("/posts", postsRoute);
 app.use("/vaults", vaultsRoute);
 app.use("/users", usersRoute);
 app.use("/dashboard", dashboardRoute);
