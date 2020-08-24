@@ -1,26 +1,13 @@
 const mongoose = require('mongoose');
 
 const VaultSchema = mongoose.Schema({
-    label: {
+    userId: {
         type: String,
-        required: true
+        rquired: true
     },
-    totalAmount: {
-        type: Number,
-        required: true
-    },
-    currentAmount: {
-        type: Number,
-        required: false
-    },
-    favorite: {
-        type: Boolean,
-        default: false
-    },
-    imageURL: {
-        type: String,
-        required: false
+    array: {
+        type: []
     }
-});
+})
 
 module.exports = mongoose.model('Vaults', VaultSchema);
