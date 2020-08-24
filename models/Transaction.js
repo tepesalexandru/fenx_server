@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const TransactionSchema = mongoose.Schema({
-    userId: {
-        type: String,
-        required: true
-    },
     amount: {
         type: Number,
         required: true
@@ -15,6 +11,14 @@ const TransactionSchema = mongoose.Schema({
         required: true
     },
     type: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    imageURL: {
         type: String,
         required: true
     }

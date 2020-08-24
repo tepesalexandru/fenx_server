@@ -20,6 +20,10 @@ const VaultDetailsSchema = mongoose.Schema({
     favorite: {
         type: Boolean,
         required: false
+    },
+    imageURL: {
+        type: String,
+        required: false
     }
 })
 

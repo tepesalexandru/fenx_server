@@ -1,12 +1,29 @@
 const Storage = require("../../models/Vault");
 const Vault = require("../../models/VaultDetails");
+const Transaction = require("../../models/Transaction");
+const TransactionHistory = require("../../models/VaultTransactions");
 
 const vaultController = {
     async byId (req, res) {
-        const vault = await Vault.findOne({
+        const vault = await Storage.findOne({
             userId: req.params.userId
         });
+        if (vault === null) {
+            const newStorage = new Storage({
+                userId: req.params.userId
+            });
+            await newStorage.save();
+            res.json(newStorage);
+            return;
+        }
         res.json(vault);
+    },
+    async vaultById (req, res) {
+        const vault = await Storage.find(
+            {"array.vaultId": req.params.vaultId},
+            {_id: 0, array: {$elemMatch: {"vaultId": req.params.vaultId}}}
+        )
+        res.json(vault[0].array[0]);
     },
     async create (req, res) {
         const requestBody = req.body;
@@ -16,7 +33,12 @@ const vaultController = {
             $push: {
                 array: newVault
             }
-        })
+        });
+        const newTransactionHistory = new TransactionHistory({
+            userId: req.params.userId,
+            vaultId: req.body.vaultId
+        });
+        await newTransactionHistory.save();
         res.json(newVault);
     },
     async delete (req, res) {
@@ -43,6 +65,7 @@ const vaultController = {
         
         res.json(findVault);
     }
+    
 }
 
 module.exports = vaultController;

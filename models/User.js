@@ -8,6 +8,10 @@ const UserSchema = mongoose.Schema({
     username: {
         type: String,
         required: true
+    },
+    imageURL: {
+        type: String,
+        required: true
     }
 })
 

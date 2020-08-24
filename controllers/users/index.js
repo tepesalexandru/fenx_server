@@ -15,12 +15,9 @@ const userController  = {
             res.json(findUser);
             return;
         }
-        
         const newUser = new User(requestBody);
-        newUser.save((err, saved) => {
-            User.findOne({_id: saved._id})
-                .exec((err, user) => res.json(user));
-        })
+        await newUser.save();
+        res.json(newUser);
     }
 }
 
