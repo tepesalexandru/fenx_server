@@ -64,6 +64,21 @@ const vaultController = {
         );
         
         res.json(findVault);
+    },
+    async update (req, res) {
+        console.log("received!")
+        const findVault = await Storage.updateOne({
+            userId: req.params.userId,
+            "array.vaultId": req.params.vaultId
+            },
+            {$set: {
+                "array.$.label": req.body.label,
+                "array.$.totalAmount": req.body.amount,
+                "array.$.imageURL": req.body.imageURL
+            }}
+            
+        );
+        res.json(findVault);
     }
     
 }
