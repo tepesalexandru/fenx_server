@@ -7,7 +7,7 @@ const VaultSchema = mongoose.Schema({
     },
     array: {
         type: []
-    }
+    },
 })
 
 module.exports = mongoose.model('Vaults', VaultSchema);

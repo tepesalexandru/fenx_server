@@ -2,6 +2,7 @@ const Storage = require("../../models/Vault");
 const Vault = require("../../models/VaultDetails");
 const Transaction = require("../../models/Transaction");
 const TransactionHistory = require("../../models/VaultTransactions");
+const VaultGoals = require("../../models/VaultGoals");
 
 const vaultController = {
     async byId (req, res) {
@@ -27,6 +28,7 @@ const vaultController = {
     },
     async create (req, res) {
         const requestBody = req.body;
+        console.log(requestBody);
         const newVault = new Vault(requestBody);
         await Storage.updateOne({
             userId: req.params.userId,
@@ -38,7 +40,12 @@ const vaultController = {
             userId: req.params.userId,
             vaultId: req.body.vaultId
         });
+        const newVaultGoals = new VaultGoals({
+            userId: req.params.userId,
+            vaultId: req.body.vaultId,
+        });
         await newTransactionHistory.save();
+        await newVaultGoals.save();
         res.json(newVault);
     },
     async delete (req, res) {

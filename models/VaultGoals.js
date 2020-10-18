@@ -1,20 +1,17 @@
 const mongoose = require("mongoose");
 
 const VaultGoalsSchema = mongoose.Schema({
-    userId: {
-        type: String,
-        required: true
-    },
     vaultId: {
         type: String,
         required: true
     },
+    hasGoal: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     deadline: {
         type: Date,
-        required: false
-    },
-    amount: {
-        type: Number,
         required: false
     },
     format: {

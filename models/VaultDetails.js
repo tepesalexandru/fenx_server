@@ -24,6 +24,9 @@ const VaultDetailsSchema = mongoose.Schema({
     imageURL: {
         type: String,
         required: false
+    },
+    contributors: {
+        type: []
     }
 })
 
